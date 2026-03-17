@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "turbo dev --parallel",
-    "kill-ports": "lsof -ti:3000,3001 | xargs kill -9 2>/dev/null || true",
+    "kill-ports": "lsof -ti:3000,3001,3002 | xargs kill -9 2>/dev/null || true",
     "dev-clean": "npm run kill-ports && npm run dev"
   },
   "devDependencies": {
