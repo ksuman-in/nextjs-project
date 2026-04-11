@@ -9,6 +9,10 @@ const nextConfig = {
         source: "/nextjs-handler/:path*",
         destination: "http://localhost:3002/nextjs-handler/:path*",
       },
+      {
+        source: "/data-fetching/:path*",
+        destination: "http://localhost:3003/data-fetching/:path*",
+      },
     ];
   },
 };
