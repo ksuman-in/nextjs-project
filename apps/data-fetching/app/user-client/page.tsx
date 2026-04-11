@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type User = {
@@ -16,12 +17,12 @@ export default function UsersClient() {
 
   useEffect(() => {
     async function fetchUsers() {
+      setLoading(true);
+      setError("");
       try {
-        setLoading(true);
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/users",
         );
-        setLoading(false);
         if (!response.ok) {
           throw new Error("Failed to fetch user");
         }
@@ -33,6 +34,8 @@ export default function UsersClient() {
         } else {
           setError("An unknown error occurred!!");
         }
+      } finally {
+        setLoading(false);
       }
     }
     fetchUsers();
@@ -61,6 +64,12 @@ export default function UsersClient() {
                 <div>Email: {email}</div>
                 <div>Phone: {phone}</div>
               </div>
+              <Link
+                className="text-blue-500 hover:underline "
+                href={`/user-parallel/${id}`}
+              >
+                See Posts and Albums
+              </Link>
             </li>
           );
         })}

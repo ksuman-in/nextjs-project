@@ -8,6 +8,9 @@ export default async function Author({ userId }: { userId: number }) {
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/users/${userId}`,
   );
+  if (!response.ok) {
+    throw new Error(`Failed to fetch author for userId=${userId}`);
+  }
   const author: Author = await response.json();
   return (
     <div className="text-sm text-gray-500">

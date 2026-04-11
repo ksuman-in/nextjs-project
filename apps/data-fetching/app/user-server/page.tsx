@@ -11,6 +11,9 @@ type User = {
 export default async function UserServer() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  if (!response.ok) {
+    throw new Error("Failed to fetch users");
+  }
   const userData: User[] = await response.json();
 
   return (
@@ -33,7 +36,7 @@ export default async function UserServer() {
                 className="text-blue-500 hover:underline "
                 href={`/user-parallel/${id}`}
               >
-                See Posts and Albmus
+                See Posts and Albums
               </Link>
             </li>
           );

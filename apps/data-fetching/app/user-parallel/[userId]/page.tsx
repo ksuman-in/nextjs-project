@@ -10,16 +10,26 @@ type Album = {
 };
 
 async function getPosts(userId: string) {
+  const encodedUserId = encodeURIComponent(userId);
   const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
+    `https://jsonplaceholder.typicode.com/posts?userId=${encodedUserId}`,
   );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts for userId=${userId}`);
+  }
 
   return response.json();
 }
 async function getAlbums(userId: string) {
+  const encodedUserId = encodeURIComponent(userId);
   const response = await fetch(
-    `https://jsonplaceholder.typicode.com/albums?userId=${userId}`,
+    `https://jsonplaceholder.typicode.com/albums?userId=${encodedUserId}`,
   );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch albums for userId=${userId}`);
+  }
 
   return response.json();
 }

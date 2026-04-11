@@ -10,6 +10,9 @@ type Posts = {
 
 export default async function PostsSequential() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch posts: ${response.status}`);
+  }
   const posts: Posts[] = await response.json();
 
   const filterPosts = posts.filter((post) => post.id % 10 === 1);
@@ -30,7 +33,7 @@ export default async function PostsSequential() {
               <p className="text-gray-600 mb-4 leading-relaxed">{post.body}</p>
               <Suspense
                 fallback={
-                  <div className="animate-plus">
+                  <div className="animate-pulse">
                     <div className="h-2.5 bg-neutral-300 rounded-full w-48 mb-4"></div>
                   </div>
                 }
